@@ -3,10 +3,14 @@ import datetime as dt
 import numpy as np
 import os
 
-def load_history(start=dt.datetime(2000,1,1), end=dt.datetime(2100,1,1)):
+def load_history(filename, start=dt.datetime(2000,1,1), end=dt.datetime(2100,1,1)):
+    cache_folder = 'cache_history'
+    cache_file = os.path.join(cache_folder,filename+'.npy')
     data = []
-    if not os.path.isfile('cache.npy'):
-        with open('DOGEUSDT-1m-data.csv') as f:
+    if not os.path.isdir(cache_folder):
+        os.mkdir(cache_folder)
+    if not os.path.isfile(cache_file):
+        with open(filename) as f:
             for line in csv.reader(f):
                 if line[0] == 'timestamp':
                     continue
@@ -15,10 +19,9 @@ def load_history(start=dt.datetime(2000,1,1), end=dt.datetime(2100,1,1)):
                 for i in range(1, len(line)):
                     line[i] = float(line[i])
                 data.append(line)
-        np.save('cache.npy', data, allow_pickle=True)
+        np.save(cache_file, data, allow_pickle=True)
     else:
-        data = np.load('cache.npy', allow_pickle=True)
-
+        data = np.load(cache_file, allow_pickle=True)
 
     data_dates = []
     for line in data:

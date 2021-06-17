@@ -1,8 +1,7 @@
-import load_history
 import trader
 import datetime as dt
 
-data = load_history.load_history(dt.datetime(2021,4,1), dt.datetime(2021,5,1))
+data = trader.load_history("VETUSDT-1m-data.csv",dt.datetime(2021,5,1), dt.datetime(2021,6,1))
 
 class Hold(trader.Trader):
     def __init__(self):
