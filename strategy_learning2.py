@@ -36,7 +36,6 @@ def data2dataset(data):
     return np.array(X),np.array(Y)
 
 model = Sequential()
-"""
 model.add(Dense(300, input_dim=len(MAS), activation='relu'))
 model.add(Dense(600, activation='relu'))
 model.add(Dense(1200, activation='relu'))
@@ -44,7 +43,6 @@ model.add(Dense(600, activation='relu'))
 model.add(Dense(250, activation='relu'))
 model.add(Dense(100, activation='relu'))
 model.add(Dense(24, activation='relu'))
-"""
 model.add(Dense(1, activation='relu'))
 
 
@@ -56,7 +54,7 @@ model.compile(
 
 X,Y = data2dataset(training_data)
 
-model.fit(X,Y, epochs=1)
+model.fit(X,Y, epochs=30)
 model.save(os.path.join(cache, str(dt.datetime.now()).replace(" ", "T")))
 
 
