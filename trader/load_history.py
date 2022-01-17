@@ -28,4 +28,6 @@ def load_history(filename, start=dt.datetime(2000,1,1), end=dt.datetime(2100,1,1
         if start < line[0] < end:
             data_dates.append(line)
 
+    data_dates = np.array(data_dates)
+
     return data_dates
